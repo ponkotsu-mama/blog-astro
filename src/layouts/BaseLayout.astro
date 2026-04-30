@@ -1,0 +1,51 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  activeNav?: string;
+}
+const { title, description = "アドラー心理学が教えてくれた、子育てが楽になる考え方。", activeNav } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title} | ポンコツ母さんの、それでもなんとかなる子育て話</title>
+  <meta name="description" content={description}>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-title">
+        <a href="/">ポンコツ母さんの、<br>それでもなんとかなる子育て話</a>
+      </div>
+      <nav>
+        <ul class="site-nav">
+          <li><a href="/" class={activeNav === 'top' ? 'active' : ''}>トップ</a></li>
+          <li><a href="/about" class={activeNav === 'about' ? 'active' : ''}>はじめに</a></li>
+          <li><a href="/articles" class={activeNav === 'articles' ? 'active' : ''}>記事一覧</a></li>
+          <li><a href="/profile" class={activeNav === 'profile' ? 'active' : ''}>プロフィール</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="site-footer">
+    <nav>
+      <ul class="footer-nav">
+        <li><a href="/">トップ</a></li>
+        <li><a href="/about">はじめに</a></li>
+        <li><a href="/articles">記事一覧</a></li>
+        <li><a href="/profile">プロフィール</a></li>
+      </ul>
+    </nav>
+    <p>&copy; 2026 ポンコツ母さんの、それでもなんとかなる子育て話</p>
+  </footer>
+
+</body>
+</html>

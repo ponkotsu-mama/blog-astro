@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+).slice(0, 3);
+---
+<BaseLayout title="ポンコツ母さんの、それでもなんとかなる子育て話" activeNav="top">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-label">子育てに疲れたお母さんへ</span>
+      <h1 class="hero-title">ポンコツ母さんの、<br>それでもなんとかなる子育て話</h1>
+      <p class="hero-catchcopy">アドラー心理学が教えてくれた、子育てが楽になる考え方</p>
+
+      <div class="hero-message">
+        <p>私が皆さんにお伝えするのは解決方法ではありません。</p>
+        <p>その状態で自分らしく、自分をどう保っていくか。</p>
+        <p>その方法をお伝えしたいのです。</p>
+      </div>
+
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="/about" class="btn btn-primary">はじめにを読む</a>
+        <a href="/articles" class="btn btn-outline">記事一覧を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section concept-section">
+    <div class="section-inner">
+      <h2 class="section-title">このブログについて</h2>
+      <p class="section-subtitle">一人で抱えて苦しんでいるあなたへ</p>
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="concept-icon">🌱</div>
+          <h3>解決じゃなくて、自分を保つこと</h3>
+          <p>子どもをどう変えるかではなく、自分がどうあるかを一緒に考えます。</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">💛</div>
+          <h3>苦しいのはあなただけじゃない</h3>
+          <p>不登校・子育ての苦しさを一人で抱えているお母さんに寄り添います。</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">📖</div>
+          <h3>アドラー心理学を、やさしく</h3>
+          <p>難しい理論ではなく、実体験を通じてやさしく伝えます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <h2 class="section-title">最新の記事</h2>
+      <p class="section-subtitle">「あの頃の私へ」シリーズ</p>
+      <div class="articles-grid">
+        {posts.map((post) => (
+          <div class="article-card">
+            <div class="card-body">
+              <span class="card-category">{post.data.category}</span>
+              <h3 class="card-title">
+                <a href={`/articles/${post.id}`}>{post.data.title}</a>
+              </h3>
+              <p class="card-excerpt">{post.data.excerpt}</p>
+              <div class="card-meta">{post.data.date}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="text-align:center; margin-top:40px;">
+        <a href="/articles" class="btn btn-outline">すべての記事を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--color-primary-pale);">
+    <div class="section-inner">
+      <h2 class="section-title">書いている人</h2>
+      <div class="profile-preview">
+        <div class="profile-avatar">🌸</div>
+        <div>
+          <h3>ポンコツ母さん</h3>
+          <p class="role">埼玉県在住</p>
+          <p>長年、子育てに悩み続けました。アドラー心理学と出会い、少しずつ自分を取り戻しました。「解決方法」ではなく「自分を保つ方法」を伝えたくて、このブログを始めました。</p>
+          <p style="margin-top:12px;">
+            <a href="/profile" class="btn btn-outline" style="padding:8px 20px; font-size:0.85rem;">もっと読む</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
