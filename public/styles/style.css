@@ -497,6 +497,10 @@ img {
 
 /* ============ レスポンシブ ============ */
 @media (max-width: 600px) {
+  .site-header {
+    padding: 0 12px;
+  }
+
   .hero-title {
     font-size: 1.4rem;
   }
@@ -505,15 +509,22 @@ img {
     flex-direction: column;
     height: auto;
     padding: 12px 0;
-    gap: 8px;
+    gap: 6px;
+    align-items: stretch;
   }
 
   .site-nav {
-    gap: 16px;
+    gap: 14px;
+    flex-wrap: nowrap;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .site-nav a {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
   }
 
   .profile-preview {
